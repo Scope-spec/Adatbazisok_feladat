@@ -22,7 +22,7 @@ cursor.execute('ALTER TABLE Adagok DROP COLUMN Vege_IDO')
 df['ADAGIDO'] = pd.to_numeric(df['ADAGIDO'])
 df['ADAGSZAM'] = pd.to_numeric(df['ADAGSZAM'])
 df['ADAGKOZI IDO'] = pd.to_numeric(df['ADAGKOZI IDO'])
+df.to_sql('Adagok', conn, if_exists='replace', index=False)
 """
-
 conn.commit()
 conn.close()
