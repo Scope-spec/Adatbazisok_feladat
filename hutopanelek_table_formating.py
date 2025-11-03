@@ -19,5 +19,6 @@ for col in valuey_cols:
 df[valuey_cols] = df[valuey_cols].apply(pd.to_numeric, errors='coerce')
 df.to_sql('Hutopanelek', conn, if_exists='replace', index=False)
 """
+
 conn.commit()
 conn.close()
