@@ -15,7 +15,16 @@ for col in valuey_cols:
     df[col] = df[col].str.replace(",", ".", regex=False)
 df[valuey_cols] = df[valuey_cols].apply(pd.to_numeric, errors='coerce')
 
-df.to_sql('Hutopanelek', conn, if_exists='replace', index=False)
+rename_columns = {}
+for i in range(1,16):
+    old_name = f'Panel hőfok {i} [°C] ValueY'
+    new_name = f'panel{i}'
+    rename_columns[old_name] = new_name
 
-print(df)
-conn.close()
+df = df.rename(columns=rename_columns)
+
+df['timestamp'] = pd.to_datetime(df['timestamp'].str.replace('.', '-'))
+
+df.to_sql('Hutopanelek', conn, if_exists='replace', index=False)
+df.dropna(inplace=True)
+print(df.head())
