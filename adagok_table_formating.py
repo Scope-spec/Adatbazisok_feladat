@@ -20,6 +20,10 @@ df['ADAGKOZI IDO'] = pd.to_numeric(df['ADAGKOZI IDO'])
 df['vege_datetime'] = pd.to_datetime(df['vege_datetime'])
 df['kezdet_datetime'] = pd.to_datetime(df['kezdet_datetime'])
 
+df = df.rename(columns={
+    "ADAGKOZI IDO": "ADAGKOZI_IDO"
+})
+
 df.to_sql('Adagok', conn, if_exists='replace', index=False)
 print(df)
 conn.close()
